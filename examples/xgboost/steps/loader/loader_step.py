@@ -36,13 +36,13 @@ def data_loader() -> Output(mat_train=xgb.DMatrix, mat_test=xgb.DMatrix):
     with tempfile.NamedTemporaryFile(
         mode="w", delete=False, suffix=".html", encoding="utf-8"
     ) as f:
-        f.write(requests.get(TRAIN_SET_RAW).text)
+        f.write(requests.get(TRAIN_SET_RAW, timeout=60).text)
         mat_train = xgb.DMatrix(f.name)
 
     with tempfile.NamedTemporaryFile(
         mode="w", delete=False, suffix=".html", encoding="utf-8"
     ) as f:
-        f.write(requests.get(TEST_SET_RAW).text)
+        f.write(requests.get(TEST_SET_RAW, timeout=60).text)
         mat_test = xgb.DMatrix(f.name)
 
     return mat_train, mat_test
