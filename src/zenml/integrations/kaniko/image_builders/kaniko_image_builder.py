@@ -14,7 +14,6 @@
 """Kaniko image builder implementation."""
 
 import json
-import random
 import shutil
 import subprocess
 import tempfile
@@ -25,6 +24,7 @@ from zenml.image_builders import BaseImageBuilder
 from zenml.integrations.kaniko.flavors import KanikoImageBuilderConfig
 from zenml.logger import get_logger
 from zenml.stack import StackValidator
+import secrets
 
 if TYPE_CHECKING:
     from zenml.container_registries import BaseContainerRegistry
@@ -308,7 +308,7 @@ class KanikoImageBuilder(BaseImageBuilder):
         Returns:
             The Pod name.
         """
-        return f"kaniko-build-{random.Random().getrandbits(32):08x}"
+        return f"kaniko-build-{secrets.SystemRandom().Random().getrandbits(32):08x}"
 
     def _read_pod_output(self, pod_name: str) -> str:
         """Reads the Pod output message.

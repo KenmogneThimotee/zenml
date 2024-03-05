@@ -12,10 +12,10 @@
 #  or implied. See the License for the specific language governing
 #  permissions and limitations under the License.
 
-import random
 
 from zenml.hooks import alerter_failure_hook, alerter_success_hook
 from zenml.steps import BaseParameters, Output, step
+import secrets
 
 
 class HookParams(BaseParameters):
@@ -36,7 +36,7 @@ def get_first_num(params: HookParams) -> int:
 @step(enable_cache=False)
 def get_random_int() -> Output(random_num=int):
     """Get a random integer between 0 and 10"""
-    return random.randint(0, 10)
+    return secrets.SystemRandom().randint(0, 10)
 
 
 @step

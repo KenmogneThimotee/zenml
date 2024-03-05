@@ -13,13 +13,12 @@
 #  permissions and limitations under the License.
 """CLI command to show installed ZenML version."""
 
-import random
-
 import click
 
 from zenml import __version__
 from zenml.cli.cli import cli
 from zenml.cli.utils import declare
+import secrets
 
 ascii_arts = [
     r"""      
@@ -78,5 +77,5 @@ ascii_arts = [
 @cli.command()
 def version() -> None:
     """Version of ZenML."""
-    declare(random.choice(ascii_arts))
+    declare(secrets.SystemRandom().choice(ascii_arts))
     click.echo(click.style(f"version: {__version__}", bold=True))
