@@ -33,6 +33,7 @@ from sklearn.base import (
 from zenml.enums import ArtifactType
 from zenml.io import fileio
 from zenml.materializers.base_materializer import BaseMaterializer
+import fickling
 
 DEFAULT_FILENAME = "model"
 
@@ -79,7 +80,7 @@ class SklearnMaterializer(BaseMaterializer):
         super().load(data_type)
         filepath = os.path.join(self.uri, DEFAULT_FILENAME)
         with fileio.open(filepath, "rb") as fid:
-            clf = pickle.load(fid)
+            clf = fickling.load(fid)
         return clf
 
     def save(
