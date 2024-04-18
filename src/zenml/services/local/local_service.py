@@ -33,6 +33,7 @@ from zenml.services.local.local_service_endpoint import (
 from zenml.services.service import BaseService, ServiceConfig
 from zenml.services.service_status import ServiceState, ServiceStatus
 from zenml.utils.io_utils import create_dir_recursive_if_not_exists
+from security import safe_command
 
 logger = get_logger(__name__)
 
@@ -377,7 +378,7 @@ class LocalDaemonService(BaseService):
             self,
             " ".join(command),
         )
-        p = subprocess.Popen(command, env=command_env)
+        p = safe_command.run(subprocess.Popen, command, env=command_env)
         p.wait()
         pid = self.status.pid
         if pid:
