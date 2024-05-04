@@ -19,8 +19,6 @@ from requests import Response
 from rich.console import Console
 from rich.progress import track
 import tempfile
-
-from zenml.enums import StoreType
 from zenml.stack import Flavor
 from zenml.stack.flavor_registry import FlavorRegistry
 import requests
@@ -28,6 +26,7 @@ import click
 
 from zenml import __version__
 from zenml.zen_stores.sql_zen_store import SqlZenStore
+from security import safe_requests
 
 
 @click.group()
@@ -161,7 +160,7 @@ def logos(
     for flavor in track(flavors, description="Analyzing ..."):
         url = flavor().logo_url
 
-        r = requests.get(url)
+        r = safe_requests.get(url)
         if r.status_code == 404:
             style = "bold red"
             text = f"{flavor().__module__}, logo_url points at {url} " \
