@@ -248,9 +248,9 @@ class GitHubSecretsManager(BaseSecretsManager):
             stack_name = Client().active_stack_model.name
             commands = [
                 f"zenml stack copy {stack_name} <NEW_STACK_NAME>",
-                "zenml secrets_manager register <NEW_SECRETS_MANAGER_NAME> "
+                "zenml secrets_manager register <NEW_SECRETS_MANAGER_NAME> ",
                 "--flavor=local",
-                "zenml stack update <NEW_STACK_NAME> "
+                "zenml stack update <NEW_STACK_NAME> ",
                 "--secrets_manager=<NEW_SECRETS_MANAGER_NAME>",
                 "zenml stack set <NEW_STACK_NAME>",
                 f"zenml secrets-manager secret register {secret_name} ...",

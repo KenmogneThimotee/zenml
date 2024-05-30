@@ -76,19 +76,10 @@ class GCPImageBuilder(BaseImageBuilder, GoogleCredentialsMixin):
                 stack.container_registry.flavor
                 != ContainerRegistryFlavor.GCP.value
             ):
-                return False, (
-                    "The GCP Image Builder requires a GCP container registry to "
-                    "push the image to. Please update your stack to include a "
-                    "GCP container registry and try again."
-                )
+                return False, "The GCP Image Builder requires a GCP container registry to ", "push the image to. Please update your stack to include a ", "GCP container registry and try again."
 
             if stack.artifact_store.flavor != GCP_ARTIFACT_STORE_FLAVOR:
-                return False, (
-                    "The GCP Image Builder requires a GCP Artifact Store to "
-                    "upload the build context, so Cloud Build can access it."
-                    "Please update your stack to include a GCP Artifact Store "
-                    "and try again."
-                )
+                return False, "The GCP Image Builder requires a GCP Artifact Store to ", "upload the build context, so Cloud Build can access it.", "Please update your stack to include a GCP Artifact Store ", "and try again."
 
             return True, ""
 

@@ -228,9 +228,7 @@ class SparkStepOperator(BaseStepOperator):
         """
         # Base spark-submit command
         command = [
-            f"spark-submit "
-            f"--master {self.config.master} "
-            f"--deploy-mode {deploy_mode}"
+            f"spark-submit ", f"--master {self.config.master} ", f"--deploy-mode {deploy_mode}"
         ]
 
         # Add the configuration parameters

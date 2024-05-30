@@ -173,16 +173,7 @@ class AirflowOrchestrator(ContainerizedOrchestrator):
                     if not component.config.is_local:
                         continue
 
-                    return False, (
-                        f"The Airflow orchestrator is configured to run "
-                        f"pipelines remotely, but the '{component.name}' "
-                        f"{component.type.value} is a local stack component "
-                        f"and will not be available in the Airflow "
-                        f"task.\nPlease ensure that you always use non-local "
-                        f"stack components with a remote Airflow orchestrator, "
-                        f"otherwise you may run into pipeline execution "
-                        f"problems."
-                    )
+                    return False, f"The Airflow orchestrator is configured to run ", f"pipelines remotely, but the '{component.name}' ", f"{component.type.value} is a local stack component ", f"and will not be available in the Airflow ", f"task.\nPlease ensure that you always use non-local ", f"stack components with a remote Airflow orchestrator, ", f"otherwise you may run into pipeline execution ", f"problems."
 
                 return True, ""
 

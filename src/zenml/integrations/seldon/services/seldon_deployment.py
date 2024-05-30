@@ -221,7 +221,7 @@ class SeldonDeploymentService(BaseDeploymentService):
         if deployment.is_failed():
             return (
                 ServiceState.ERROR,
-                f"Seldon Core deployment '{name}' failed: "
+                f"Seldon Core deployment '{name}' failed: ",
                 f"{deployment.get_error()}",
             )
 

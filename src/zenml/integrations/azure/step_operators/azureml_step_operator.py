@@ -132,14 +132,7 @@ class AzureMLStepOperator(BaseStepOperator):
             stack: "Stack",
         ) -> Tuple[bool, str]:
             if stack.artifact_store.config.is_local:
-                return False, (
-                    "The AzureML step operator runs code remotely and "
-                    "needs to write files into the artifact store, but the "
-                    f"artifact store `{stack.artifact_store.name}` of the "
-                    "active stack is local. Please ensure that your stack "
-                    "contains a remote artifact store when using the AzureML "
-                    "step operator."
-                )
+                return False, "The AzureML step operator runs code remotely and ", "needs to write files into the artifact store, but the ", f"artifact store `{stack.artifact_store.name}` of the ", "active stack is local. Please ensure that your stack ", "contains a remote artifact store when using the AzureML ", "step operator."
 
             return True, ""
 

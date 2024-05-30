@@ -121,15 +121,7 @@ class TektonOrchestrator(ContainerizedOrchestrator):
             contexts, _ = self.get_kubernetes_contexts()
 
             if self.config.kubernetes_context not in contexts:
-                return False, (
-                    f"Could not find a Kubernetes context named "
-                    f"'{self.config.kubernetes_context}' in the local "
-                    f"Kubernetes configuration. Please make sure that the "
-                    f"Kubernetes cluster is running and that the kubeconfig "
-                    f"file is configured correctly. To list all configured "
-                    f"contexts, run:\n\n"
-                    f"  `kubectl config get-contexts`\n"
-                )
+                return False, f"Could not find a Kubernetes context named ", f"'{self.config.kubernetes_context}' in the local ", f"Kubernetes configuration. Please make sure that the ", f"Kubernetes cluster is running and that the kubeconfig ", f"file is configured correctly. To list all configured ", f"contexts, run:\n\n", f"  `kubectl config get-contexts`\n"
 
             silence_local_validations_msg = (
                 f"To silence this warning, set the "

@@ -74,25 +74,13 @@ class KanikoImageBuilder(BaseImageBuilder):
             assert stack.container_registry
 
             if stack.container_registry.config.is_local:
-                return False, (
-                    "The Kaniko image builder builds Docker images in a "
-                    "Kubernetes cluster and isn't able to push the resulting "
-                    "image to a local container registry running on your "
-                    "machine. Please update your stack to include a remote "
-                    "container registry and try again."
-                )
+                return False, "The Kaniko image builder builds Docker images in a ", "Kubernetes cluster and isn't able to push the resulting ", "image to a local container registry running on your ", "machine. Please update your stack to include a remote ", "container registry and try again."
 
             if (
                 self.config.store_context_in_artifact_store
                 and stack.artifact_store.config.is_local
             ):
-                return False, (
-                    "The Kaniko image builder is configured to upload the "
-                    "build context to the artifact store. This only works with "
-                    "remote artifact stores so that the Kaniko build pod is "
-                    "able to read from it. Please update your stack to include "
-                    "a remote artifact store and try again."
-                )
+                return False, "The Kaniko image builder is configured to upload the ", "build context to the artifact store. This only works with ", "remote artifact stores so that the Kaniko build pod is ", "able to read from it. Please update your stack to include ", "a remote artifact store and try again."
 
             return True, ""
 

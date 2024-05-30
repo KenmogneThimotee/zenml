@@ -140,34 +140,14 @@ class GitHubActionsOrchestrator(ContainerizedOrchestrator):
             assert container_registry is not None
 
             if container_registry.config.is_local:
-                return False, (
-                    "The GitHub Actions orchestrator requires a remote "
-                    f"container registry, but the '{container_registry.name}' "
-                    "container registry of your active stack points to a local "
-                    f"URI '{container_registry.config.uri}'. Please make sure "
-                    "stacks with a GitHub Actions orchestrator always contain "
-                    "remote container registries."
-                )
+                return False, "The GitHub Actions orchestrator requires a remote ", f"container registry, but the '{container_registry.name}' ", "container registry of your active stack points to a local ", f"URI '{container_registry.config.uri}'. Please make sure ", "stacks with a GitHub Actions orchestrator always contain ", "remote container registries."
 
             if container_registry.requires_authentication:
-                return False, (
-                    "The GitHub Actions orchestrator currently only works with "
-                    "GitHub container registries or public container "
-                    f"registries, but your {container_registry.flavor} "
-                    f"container registry '{container_registry.name}' requires "
-                    "authentication."
-                )
+                return False, "The GitHub Actions orchestrator currently only works with ", "GitHub container registries or public container ", f"registries, but your {container_registry.flavor} ", f"container registry '{container_registry.name}' requires ", "authentication."
 
             for component in stack.components.values():
                 if component.local_path is not None:
-                    return False, (
-                        "The GitHub Actions orchestrator runs pipelines on "
-                        "remote GitHub Actions runners, but the "
-                        f"'{component.name}' {component.type.value} of your "
-                        "active stack is a local component. Please make sure "
-                        "to only use remote stack components in combination "
-                        "with the GitHub Actions orchestrator. "
-                    )
+                    return False, "The GitHub Actions orchestrator runs pipelines on ", "remote GitHub Actions runners, but the ", f"'{component.name}' {component.type.value} of your ", "active stack is a local component. Please make sure ", "to only use remote stack components in combination ", "with the GitHub Actions orchestrator. "
 
             return True, ""
 

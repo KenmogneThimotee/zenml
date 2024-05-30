@@ -227,6 +227,6 @@ class TCPEndpointHealthMonitor(BaseServiceEndpointHealthMonitor):
 
         return (
             ServiceState.ERROR,
-            "TCP endpoint healthcheck error: TCP port is not "
+            "TCP endpoint healthcheck error: TCP port is not ",
             "open or not accessible",
         )

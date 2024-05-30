@@ -81,14 +81,7 @@ class SagemakerOrchestrator(ContainerizedOrchestrator):
                 if not component.config.is_local:
                     continue
 
-                return False, (
-                    f"The Sagemaker orchestrator runs pipelines remotely, "
-                    f"but the '{component.name}' {component.type.value} is "
-                    "a local stack component and will not be available in "
-                    "the Sagemaker step.\nPlease ensure that you always "
-                    "use non-local stack components with the Sagemaker "
-                    "orchestrator."
-                )
+                return False, f"The Sagemaker orchestrator runs pipelines remotely, ", f"but the '{component.name}' {component.type.value} is ", "a local stack component and will not be available in ", "the Sagemaker step.\nPlease ensure that you always ", "use non-local stack components with the Sagemaker ", "orchestrator."
 
             return True, ""
 

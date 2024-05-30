@@ -151,15 +151,7 @@ class KubeflowOrchestrator(ContainerizedOrchestrator):
 
             if self.kubernetes_context not in contexts:
                 if not self.config.is_local:
-                    return False, (
-                        f"Could not find a Kubernetes context named "
-                        f"'{self.kubernetes_context}' in the local Kubernetes "
-                        f"configuration. Please make sure that the Kubernetes "
-                        f"cluster is running and that the kubeconfig file is "
-                        f"configured correctly. To list all configured "
-                        f"contexts, run:\n\n"
-                        f"  `kubectl config get-contexts`\n"
-                    )
+                    return False, f"Could not find a Kubernetes context named ", f"'{self.kubernetes_context}' in the local Kubernetes ", f"configuration. Please make sure that the Kubernetes ", f"cluster is running and that the kubeconfig file is ", f"configured correctly. To list all configured ", f"contexts, run:\n\n", f"  `kubectl config get-contexts`\n"
             elif active_context and self.kubernetes_context != active_context:
                 logger.warning(
                     f"The Kubernetes context '{self.kubernetes_context}' "

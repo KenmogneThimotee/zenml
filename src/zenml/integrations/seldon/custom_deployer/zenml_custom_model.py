@@ -174,11 +174,9 @@ def main(model_name: str, model_uri: str, predict_func: str) -> None:
         "--service-type",
         "MODEL",
         "--parameters",
-        (
-            f'[{{"name":"model_uri","value":"{model_uri}","type":"STRING"}},'
-            f'{{"name":"model_name","value":"{model_name}","type":"STRING"}},'
-            f'{{"name":"predict_func","value":"{predict_func}","type":"STRING"}}]'
-        ),
+        f'[{{"name":"model_uri","value":"{model_uri}","type":"STRING"}},',
+        f'{{"name":"model_name","value":"{model_name}","type":"STRING"}},',
+        f'{{"name":"predict_func","value":"{predict_func}","type":"STRING"}}]',
     ]
     try:
         subprocess.check_call(command)

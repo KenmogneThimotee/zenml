@@ -100,24 +100,13 @@ class MLFlowModelRegistry(BaseModelRegistry):
             experiment_tracker = stack.experiment_tracker
             assert experiment_tracker is not None
             if experiment_tracker.flavor != "mlflow":
-                return False, (
-                    "The MLflow model registry requires a MLflow experiment "
-                    "tracker. You should register a MLflow experiment "
-                    "tracker to the stack using the following command: "
-                    "`zenml stack update model_registry -e mlflow_tracker"
-                )
+                return False, "The MLflow model registry requires a MLflow experiment ", "tracker. You should register a MLflow experiment ", "tracker to the stack using the following command: ", "`zenml stack update model_registry -e mlflow_tracker"
             mlflow_version = mlflow.version.VERSION
             if (
                 not mlflow_version >= "2.1.1"
                 and experiment_tracker.config.is_local
             ):
-                return False, (
-                    "The MLflow model registry requires MLflow version "
-                    f"2.1.1 or higher to use a local MLflow registry. "
-                    f"Your current MLflow version is {mlflow_version}."
-                    "You can upgrade MLflow using the following command: "
-                    "`pip install --upgrade mlflow`"
-                )
+                return False, "The MLflow model registry requires MLflow version ", f"2.1.1 or higher to use a local MLflow registry. ", f"Your current MLflow version is {mlflow_version}.", "You can upgrade MLflow using the following command: ", "`pip install --upgrade mlflow`"
             return True, ""
 
         return StackValidator(
