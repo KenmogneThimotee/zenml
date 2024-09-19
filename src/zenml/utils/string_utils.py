@@ -14,8 +14,8 @@
 """Utils for strings."""
 
 import base64
-import random
 import string
+import secrets
 
 
 def get_human_readable_time(seconds: float) -> str:
@@ -100,5 +100,5 @@ def random_str(length: int) -> str:
     Returns:
         Random human-readable string.
     """
-    random.seed()
-    return "".join(random.choices(string.ascii_letters, k=length))
+    secrets.SystemRandom().seed()
+    return "".join(secrets.SystemRandom().choices(string.ascii_letters, k=length))
