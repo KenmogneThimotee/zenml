@@ -42,7 +42,7 @@ def inference_image_loader(
     Returns:
         The request body includes a base64 coded image for the inference request.
     """
-    response = requests.get(params.img_url)
+    response = requests.get(params.img_url, timeout=60)
     img = Image.open(BytesIO(response.content))
     numpydata = asarray(img)
     input = numpydata.tolist()

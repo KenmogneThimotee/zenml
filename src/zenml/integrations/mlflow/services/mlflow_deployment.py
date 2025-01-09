@@ -244,7 +244,7 @@ class MLFlowDeploymentService(LocalDaemonService, BaseDeploymentService):
             response = requests.post(
                 self.endpoint.prediction_url,
                 json={"instances": request.tolist()},
-            )
+            timeout=60)
         else:
             raise ValueError("No endpoint known for prediction.")
         response.raise_for_status()

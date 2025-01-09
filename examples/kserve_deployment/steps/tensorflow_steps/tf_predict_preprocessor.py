@@ -42,7 +42,7 @@ def tf_predict_preprocessor(
     Returns:
         The request body includes a base64 coded image for the inference request.
     """
-    res = requests.get(params.img_url)
+    res = requests.get(params.img_url, timeout=60)
     img_arr = np.array(Image.open(BytesIO(res.content)))
     img_array = img_arr.reshape((-1, 28, 28))
     instances = img_array.tolist()

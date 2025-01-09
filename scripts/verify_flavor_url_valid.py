@@ -97,7 +97,7 @@ def docs(
 
         url = url_components[0] + "/component-gallery" + url_components[1]
 
-        r = requests.head(url)
+        r = requests.head(url, timeout=60)
         if r.status_code == 404:
             style = "bold red"
             text = f"{flavor().__module__}, flavor_docs_url points at {url} " \
@@ -116,7 +116,7 @@ def docs(
     for flavor in track(flavors, description="Analyzing sdk_docs..."):
         url = flavor().sdk_docs_url
 
-        r = requests.head(url)
+        r = requests.head(url, timeout=60)
         if r.status_code == 404:
             style = "bold red"
             text = f"{flavor().__module__}, sdk_docs_url points at {url} " \
@@ -161,7 +161,7 @@ def logos(
     for flavor in track(flavors, description="Analyzing ..."):
         url = flavor().logo_url
 
-        r = requests.get(url)
+        r = requests.get(url, timeout=60)
         if r.status_code == 404:
             style = "bold red"
             text = f"{flavor().__module__}, logo_url points at {url} " \
