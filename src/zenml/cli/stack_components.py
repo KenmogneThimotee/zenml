@@ -795,7 +795,7 @@ def generate_stack_component_logs_command(
                     f.seek(0, 2)
 
                     while True:
-                        line = f.readline()
+                        line = f.readline(5_000_000)
                         if not line:
                             time.sleep(0.1)
                             continue
