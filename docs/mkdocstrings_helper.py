@@ -3,6 +3,7 @@ import os
 import subprocess
 from pathlib import Path
 from typing import List, Optional
+from security import safe_command
 
 PYDOCSTYLE_CMD = (
     "pydocstyle --convention=google --add-ignore=D100,D101,D102,"
@@ -183,7 +184,7 @@ def generate_docs(
     if (
         validate
         and Path(path).is_dir()
-        and subprocess.call(f"{PYDOCSTYLE_CMD} {path}", shell=True) > 0
+        and safe_command.run(subprocess.call, f"{PYDOCSTYLE_CMD} {path}", shell=True) > 0
     ):
         raise Exception(f"Validation for {path} failed.")
 
