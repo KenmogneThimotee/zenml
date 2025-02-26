@@ -13,12 +13,11 @@
 #  permissions and limitations under the License.
 import json
 from io import BytesIO
-
-import requests
 from numpy import asarray
 from PIL import Image
 
 from zenml.steps import BaseParameters, step
+from security import safe_requests
 
 
 class InferenceImageLoaderStepParameters(BaseParameters):
@@ -42,7 +41,7 @@ def inference_image_loader(
     Returns:
         The request body includes a base64 coded image for the inference request.
     """
-    response = requests.get(params.img_url)
+    response = safe_requests.get(params.img_url)
     img = Image.open(BytesIO(response.content))
     numpydata = asarray(img)
     input = numpydata.tolist()

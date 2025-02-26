@@ -16,10 +16,10 @@ from io import BytesIO
 from typing import Optional
 
 import numpy as np
-import requests
 from PIL import Image
 
 from zenml.steps import BaseParameters, step
+from security import safe_requests
 
 
 class TensorflowInferenceProcessorStepParameters(BaseParameters):
@@ -42,7 +42,7 @@ def tf_predict_preprocessor(
     Returns:
         The request body includes a base64 coded image for the inference request.
     """
-    res = requests.get(params.img_url)
+    res = safe_requests.get(params.img_url)
     img_arr = np.array(Image.open(BytesIO(res.content)))
     img_array = img_arr.reshape((-1, 28, 28))
     instances = img_array.tolist()
