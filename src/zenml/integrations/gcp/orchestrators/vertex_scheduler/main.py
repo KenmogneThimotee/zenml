@@ -14,10 +14,10 @@
 """Entrypoint for the scheduled vertex job."""
 import json
 import logging
-import random
 from typing import TYPE_CHECKING
 
 from google.cloud import aiplatform
+import secrets
 
 if TYPE_CHECKING:
     from flask import Request
@@ -51,7 +51,7 @@ def trigger_vertex_job(request: "Request") -> str:
     request_str = request.data.decode("utf-8")
     request_json = json.loads(request_str)
 
-    display_name = f"{request_json[JOB_ID]}-scheduled-{random.Random().getrandbits(32):08x}"
+    display_name = f"{request_json[JOB_ID]}-scheduled-{secrets.SystemRandom().Random().getrandbits(32):08x}"
 
     run = aiplatform.PipelineJob(
         display_name=display_name,
