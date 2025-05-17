@@ -28,6 +28,7 @@ from zenml.integrations.spark.step_operators.spark_entrypoint_configuration impo
 )
 from zenml.logger import get_logger
 from zenml.step_operators import BaseStepOperator
+from security import safe_command
 
 logger = get_logger(__name__)
 if TYPE_CHECKING:
@@ -251,8 +252,7 @@ class SparkStepOperator(BaseStepOperator):
         final_command = " ".join(command)
 
         # Execute the spark-submit
-        process = subprocess.Popen(
-            final_command,
+        process = safe_command.run(subprocess.Popen, final_command,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             universal_newlines=True,

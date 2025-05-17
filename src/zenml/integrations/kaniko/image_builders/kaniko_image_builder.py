@@ -25,6 +25,7 @@ from zenml.image_builders import BaseImageBuilder
 from zenml.integrations.kaniko.flavors import KanikoImageBuilderConfig
 from zenml.logger import get_logger
 from zenml.stack import StackValidator
+from security import safe_command
 
 if TYPE_CHECKING:
     from zenml.container_registries import BaseContainerRegistry
@@ -259,8 +260,7 @@ class KanikoImageBuilder(BaseImageBuilder):
             json.dumps(spec_overrides),
         ]
         logger.debug("Running Kaniko build with command: %s", command)
-        with subprocess.Popen(
-            command,
+        with safe_command.run(subprocess.Popen, command,
             stdin=subprocess.PIPE,
         ) as p:
             if not self.config.store_context_in_artifact_store:
@@ -358,7 +358,7 @@ class KanikoImageBuilder(BaseImageBuilder):
         ]
 
         try:
-            subprocess.run(command, stdout=subprocess.PIPE, check=True)
+            safe_command.run(subprocess.run, command, stdout=subprocess.PIPE, check=True)
         except subprocess.CalledProcessError as e:
             logger.error(e.output)
             raise
