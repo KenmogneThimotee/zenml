@@ -28,6 +28,7 @@ import click
 
 from zenml import __version__
 from zenml.zen_stores.sql_zen_store import SqlZenStore
+from security import safe_requests
 
 
 @click.group()
@@ -161,7 +162,7 @@ def logos(
     for flavor in track(flavors, description="Analyzing ..."):
         url = flavor().logo_url
 
-        r = requests.get(url)
+        r = safe_requests.get(url)
         if r.status_code == 404:
             style = "bold red"
             text = f"{flavor().__module__}, logo_url points at {url} " \

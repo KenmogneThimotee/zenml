@@ -23,6 +23,7 @@ from zenml.logger import get_logger
 from zenml.services.service_status import ServiceState
 from zenml.utils.networking_utils import port_is_open
 from zenml.utils.typed_model import BaseTypedModel
+from security import safe_requests
 
 logger = get_logger(__name__)
 
@@ -163,7 +164,7 @@ class HTTPEndpointHealthMonitor(BaseServiceEndpointHealthMonitor):
                     timeout=self.config.http_timeout,
                 )
             else:
-                r = requests.get(
+                r = safe_requests.get(
                     check_uri,
                     timeout=self.config.http_timeout,
                 )
