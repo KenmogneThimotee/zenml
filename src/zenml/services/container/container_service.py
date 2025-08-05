@@ -512,7 +512,7 @@ class ContainerService(BaseService):
                     return
             line = ""
             while True:
-                partial_line = f.readline()
+                partial_line = f.readline(5_000_000)
                 if partial_line:
                     line += partial_line
                     if line.endswith("\n"):
